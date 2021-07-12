@@ -25,10 +25,11 @@ class Critter(object):
         return m
 
     def talk(self):
-        print("Меня зовут", self.name, ", и сейчас я чувствую субя", self.mood, "\n")
+        print("Меня зовут", self.name, ", и сейчас я чувствую себя", self.mood, "\n")
         self.__pass_time()
 
     def eat(self, food=4):
+        food = int(input(f'Какое количество еды дать {self.name}?'))
         print("Мррр... Спасибо!")
         self.hunger -= food
         if self.hunger < 0:
@@ -36,11 +37,17 @@ class Critter(object):
         self.__pass_time()
 
     def play(self, fun=4):
+        fun = int(input(f'Сколько времени провести за игрой с {self.name}?'))
         print("Уиии!")
         self.boredom -= fun
         if self.boredom < 0:
             self.boredom = 0
         self.__pass_time()
+
+    def __str__(self):
+        print('Скука = ', self.boredom)
+        print('Голод = ', self.hunger)
+        print('Имя - ', self.name)
 
 
 def main():
@@ -66,6 +73,8 @@ def main():
             crit.eat()
         elif choice == "3":
             crit.play()
+        elif choice == "info":
+            crit.__str__()
         else:
             print("Извините, в меню нет пункта", choice)
 
